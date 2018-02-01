@@ -1,8 +1,9 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://beer-backend.herokuapp.com/api';
+axios.defaults.baseURL = 'https://meetup-backend-josep.herokuapp.com/api';
+// axios.defaults.baseURL = 'https://localhost:3001/api';
 
-const fakeGroupId = '5a64eb552b5e210029b260ac';
+const fakeGroupId = '5a727894c0675d00292cebf3';
 
 class MeetupApi {
   constructor() {
@@ -12,6 +13,7 @@ class MeetupApi {
 
   async fetchGroupMeetups() {
     const { data } = await axios.get(this.path);
+    console.log(data);
     return data.meetups;
   }
 }

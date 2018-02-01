@@ -7,7 +7,8 @@
     "expo": "^25.0.0",
     "react": "16.2.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-25.0.0.tar.gz",
-    "react-native-extended-stylesheet": "^0.8.0"
+    "react-native-extended-stylesheet": "^0.8.0",
+    "react-navigation": "^1.0.0-beta.27"
   },
   "devDependencies": {
     "eslint-config-equimper": "^2.2.1"
