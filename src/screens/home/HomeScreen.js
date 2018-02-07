@@ -4,6 +4,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { MeetupApi } from '../../../constants/api';
 import { LoadingScreen } from '../../commons';
 import MyMeetupsList from './components/MyMeetupsList';
+import Colors from '../../../constants/Colors';
 import styles from './styles/HomeScreen';
 
 const meetupApi = new MeetupApi();
@@ -14,6 +15,9 @@ class HomeScreen extends Component {
   };
 
   static navigationOptions = {
+    headerStyle: {
+      backgroundColor: Colors.$redColor,
+    },
     tabBarIcon: ({ tintColor }) => (
       <FontAwesome name="home" size={25} color={tintColor} />
     ),

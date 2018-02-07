@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
+import Colors from '../../../constants/Colors';
 
 class NotificationScreen extends Component {
   static navigationOptions = {
+    headerStyle: {
+      backgroundColor: Colors.$redColor,
+    },
     tabBarIcon: ({ tintColor }) => (
       <MaterialIcons name="notifications" size={25} color={tintColor} />
     ),
