@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { FontAwesome } from '@expo/vector-icons';
+import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
 
 // import { LoadingScreen } from '../../commons';
 
@@ -20,13 +20,20 @@ import { fetchMyMeetups } from './actions';
   { fetchMyMeetups },
 )
 class HomeScreen extends Component {
-  static navigationOptions = {
-    headerStyle: {
-      backgroundColor: Colors.$redColor,
-    },
-    tabBarIcon: ({ tintColor }) => (
-      <FontAwesome name="home" size={25} color={tintColor} />
-    ),
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerStyle: {
+        backgroundColor: Colors.$redColor,
+      },
+      headerRight: (
+        <TouchableOpacity onPress={() => navigation.navigate('CreateMeetup')}>
+          <MaterialIcons name="add-circle" size={30} color="white" />
+        </TouchableOpacity>
+      ),
+      tabBarIcon: ({ tintColor }) => (
+        <FontAwesome name="home" size={25} color={tintColor} />
+      ),
+    };
   };
 
   componentDidMount() {

@@ -16,7 +16,7 @@ export default TabNavigator(
   },
   {
     swipeEnabled: true,
-    animationEnabled: true,
+    animationEnabled: false,
     tabBarPosition: 'bottom',
     tabBarOptions: {
       showLabel: false,
