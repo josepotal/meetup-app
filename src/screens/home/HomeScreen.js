@@ -20,21 +20,19 @@ import { fetchMyMeetups } from './actions';
   { fetchMyMeetups },
 )
 class HomeScreen extends Component {
-  static navigationOptions = ({ navigation }) => {
-    return {
-      headerStyle: {
-        backgroundColor: Colors.$redColor,
-      },
-      headerRight: (
-        <TouchableOpacity onPress={() => navigation.navigate('CreateMeetup')}>
-          <MaterialIcons name="add-circle" size={30} color="white" />
-        </TouchableOpacity>
-      ),
-      tabBarIcon: ({ tintColor }) => (
-        <FontAwesome name="home" size={25} color={tintColor} />
-      ),
-    };
-  };
+  static navigationOptions = ({ navigation }) => ({
+    headerStyle: {
+      backgroundColor: Colors.$redColor,
+    },
+    headerRight: (
+      <TouchableOpacity onPress={() => navigation.navigate('CreateMeetup')}>
+        <MaterialIcons name="add-circle" size={30} color="white" />
+      </TouchableOpacity>
+    ),
+    tabBarIcon: ({ tintColor }) => (
+      <FontAwesome name="home" size={25} color={tintColor} />
+    ),
+  });
 
   componentDidMount() {
     this.props.fetchMyMeetups();

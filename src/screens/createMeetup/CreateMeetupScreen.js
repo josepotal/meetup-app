@@ -1,17 +1,23 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
-import { FormLabel, FormInput, Button } from 'react-native-elements';
+import { connect } from 'react-redux';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import moment from 'moment';
 
-import { MeetupApi } from '../../../constants/api';
+import { CreateMeetupForm } from './components';
+import { LoadingScreen } from '../../commons';
+import { createMeetup } from './actions';
 import Colors from '../../../constants/Colors';
 import styles from './styles/CreateMeetupScreen';
 
-const meetupApi = new MeetupApi();
-
-class CreateMeetupScreen extends Component {
+@connect(
+  state => ({
+    meetup: state.createMeetup,
+  }),
+  { createMeetup },
+)
+export default class CreateMeetupScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: 'Create a new Meetup',
     headerStyle: {
@@ -36,8 +42,6 @@ class CreateMeetupScreen extends Component {
   state = {
     isDateTimePickerVisible: false,
     date: moment(),
-    title: '',
-    description: '',
   };
 
   _showDateTimePicker = () => {
@@ -62,65 +66,41 @@ class CreateMeetupScreen extends Component {
   }
 
   _checkIfButtonSubmitDisabled() {
-    const { title, description, date } = this.state;
-    if (title.length > 5 && description.length > 10 && date > moment()) {
+    const { date } = this.state;
+    if (date > moment()) {
       return false;
     }
     return true;
   }
 
-  _changeTitle = title => this.setState({ title });
-
-  _changeDescription = description => this.setState({ description });
-
-  _createMeetup = async () => {
-    const { title, description, date } = this.state;
-    const res = await meetupApi.createGroupMeetups({
-      title,
-      description,
-      date,
-    });
-    console.log(res);
+  _createMeetup = async values => {
+    await this.props.createMeetup(values);
+    this.props.navigation.goBack();
   };
 
   render() {
+    const { meetup } = this.props;
+    if (meetup.isLoading) {
+      return (
+        <View style={styles.root}>
+          <LoadingScreen />
+        </View>
+      );
+    } else if (meetup.error.on) {
+      return (
+        <View style={styles.root}>
+          <Text>{meetup.error.message}</Text>
+        </View>
+      );
+    }
     return (
       <View style={styles.root}>
-        <View style={styles.container}>
-          <View style={styles.item}>
-            <FormLabel>Title</FormLabel>
-            <FormInput
-              onChangeText={this._changeTitle}
-              value={this.state.title}
-              selectionColor={Colors.$redColor}
-            />
-          </View>
-          <View style={styles.item}>
-            <FormLabel>Description</FormLabel>
-            <FormInput
-              onChangeText={this._changeDescription}
-              value={this.state.description}
-              selectionColor={Colors.$redColor}
-              multiline
-            />
-          </View>
-          <View style={styles.item}>
-            <Button
-              onPress={this._showDateTimePicker}
-              title={this._checkTitle()}
-              raised
-            />
-          </View>
-          <View style={styles.buttonCreate}>
-            <Button
-              backgroundColor={Colors.$blackBlueColor}
-              title="Create Meetup"
-              raised
-              disabled={this._checkIfButtonSubmitDisabled()}
-              onPress={this._createMeetup}
-            />
-          </View>
-        </View>
+        <CreateMeetupForm
+          createMeetup={this._createMeetup}
+          showDateTimePicker={this._showDateTimePicker}
+          checkTitle={this._checkTitle()}
+        />
+
         <DateTimePicker
           isVisible={this.state.isDateTimePickerVisible}
           onConfirm={this._handleDatePicked}
@@ -131,5 +111,3 @@ class CreateMeetupScreen extends Component {
     );
   }
 }
-
-export default CreateMeetupScreen;
