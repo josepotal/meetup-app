@@ -13,7 +13,7 @@ export const createMeetupValidations = values => {
     errors.title = needLonger;
   }
 
-  if (values.description && values.description.length < 6) {
+  if (values.description && values.description.length < 11) {
     errors.description = needLonger;
   }
 

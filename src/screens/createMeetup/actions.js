@@ -10,9 +10,11 @@ export const CREATE_MEETUP_ERROR = 'CREATE_MEETUP_ERROR';
 export const createMeetup = args => async dispatch => {
   dispatch({ type: CREATE_MEETUP });
   try {
+    console.log(args);
     await meetupApi.createGroupMeetups(args);
     dispatch({ type: CREATE_MEETUP_SUCCESS });
   } catch (e) {
+    console.log(e);
     return dispatch({ type: CREATE_MEETUP_ERROR });
   }
   return await dispatch(fetchMyMeetups());

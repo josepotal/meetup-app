@@ -3,7 +3,6 @@
   "private": true,
   "proxy": "http://localhost:3001",
   "scripts": {
-    "postinstall": "rndebugger-open",
     "lint": "eslint src main.js",
     "lint:fix": "eslint --fix src main.js"
   },
@@ -16,16 +15,18 @@
     "react-native-extended-stylesheet": "^0.8.0",
     "react-native-modal-datetime-picker": "^4.13.0",
     "react-navigation": "^1.0.0-beta.27",
+    "react-navigation-redux-helpers": "^1.0.1",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "redux-form": "^7.2.3",
+    "redux-persist": "^5.9.1",
     "redux-promise-middleware": "^5.0.0",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "styled-components": "^3.1.6"
   },
   "devDependencies": {
     "eslint": "^4.18.0",
     "eslint-config-equimper": "^2.2.1",
-    "react-native-debugger-open": "^0.3.16",
     "redux-logger": "^3.0.6"
   }
 }

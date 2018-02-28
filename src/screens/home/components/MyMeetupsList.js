@@ -8,21 +8,16 @@ const MyMeetupsList = ({ meetups }) => (
       <Text style={styles.title}>My Meetups</Text>
     </View>
     <View style={styles.contentContainer}>
-      <ScrollView vertical>
+      <ScrollView horizontal>
         {meetups.map(meetup => (
           <View key={meetup._id} style={styles.meetupCard}>
             <View style={styles.meetupCardTopContainer}>
               <Text style={styles.meetupCardTitle}>{meetup.title}</Text>
             </View>
             <View style={styles.meetupCardBottomContainer}>
-              <Text style={styles.meetupCardMetaName}>
-                {meetup.group.name}
-              </Text>
-              <Text style={styles.meetupCardMetaDate}>
-              Mar 2m 6:00pm
-              </Text>
+              <Text style={styles.meetupCardMetaName}>{meetup.group.name}</Text>
+              <Text style={styles.meetupCardMetaDate}>Mar 2m 6:00pm</Text>
             </View>
-          
           </View>
         ))}
       </ScrollView>
